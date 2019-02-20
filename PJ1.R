@@ -1,0 +1,20 @@
+print("This is project 1 R code")
+getwd()
+setwd('C:/Users/lhjj1/Desktop')
+skincancer = read.csv('skincancer.csv', header=TRUE, sep=',', fill=TRUE)
+skincancer
+attach(skincancer)
+incidence_rate = ((count/population*100000)/1000)
+incidence_rate
+mydata = data.frame(skincancer,incidence_rate)
+detach(skincancer)
+attach(mydata)
+mod <- lm(incidence_rate ~ agegroupcode, data=mydata)
+summary(mod)
+install.packages("ggplot2")
+library("ggplot2")
+plot <- ggplot(data=mydata, aes(x=agegroupcode, y=incidence_rate, colour=factor(agegroupcode)))
+plot+stat_smooth(method = "lm", formula = incidence_rate~agegroupcode, se=FALSE)+geom_point()
+incidence_rate[agegroupcode=='20-24']
+plot(incidence_rate[agegroupcode=='20-24'])
+abline(coef(mod))
