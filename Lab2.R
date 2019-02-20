@@ -1,3 +1,4 @@
+print("This is Lab2 R code")
 #Lab2
 
 rm(list=ls()) #way to remove all variables
